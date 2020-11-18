@@ -11,6 +11,8 @@ public class HUD {
     private List<WorldItem> collectedItems;
     private Player player;
 
+
+
     public HUD(Player player){
         collectedItems = new ArrayList<>();
         this.player = player;

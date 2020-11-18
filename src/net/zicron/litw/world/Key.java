@@ -7,7 +7,7 @@ import net.zicron.litw.logic.AABB;
 
 public class Key extends WorldItem {
     public Key(int x, int y, String itemName) {
-        super(x, y, itemName);
+        super(x, y, itemName, Items.KEY);
         Renderer.addToEntityQueue(this);
         collider = new AABB(x, y, 16, 16, Items.KEY);
     }
