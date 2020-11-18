@@ -1,0 +1,33 @@
+package net.zicron.litw.world.items;
+
+import net.zicron.litw.LITW;
+import net.zicron.litw.gfx.Drawer;
+import net.zicron.litw.gfx.Renderer;
+import net.zicron.litw.logic.AABB;
+import net.zicron.litw.world.Level;
+import net.zicron.litw.world.WorldItem;
+
+public class Gate extends WorldItem {
+    public Gate(int x, int y, String itemName) {
+        super(x, y, 43, itemName, Items.GATE);
+        Renderer.addToEntityQueue(this);
+        collider = new AABB(x, y, 48,  16, Items.GATE);
+    }
+
+    @Override
+    public void tick() {
+        collider.x = x + Level.xOffset;
+        collider.y = y + Level.yOffset;
+    }
+
+    @Override
+    public void render() {
+        int x = this.x + Level.xOffset;
+        int y = this.y + Level.yOffset;
+
+        Drawer.drawTexturedQuad(x, y, LITW.entityTextures, textureIndex, 2);
+        Drawer.drawTexturedQuad(x + 16, y, LITW.entityTextures, textureIndex+2, 2);
+        Drawer.drawTexturedQuad(x + 32, y, LITW.entityTextures, textureIndex+3, 2);
+        collider.render();
+    }
+}

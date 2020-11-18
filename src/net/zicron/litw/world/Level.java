@@ -9,6 +9,9 @@ import net.zicron.litw.io.LevelLoader;
 import net.zicron.litw.logic.AABB;
 import net.zicron.litw.logic.TileCollider;
 import net.zicron.litw.logic.Tiles;
+import net.zicron.litw.world.items.Gate;
+import net.zicron.litw.world.items.Key;
+import net.zicron.litw.world.items.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -28,6 +31,10 @@ public class Level extends Entity{
 		Level.player = null;
 		//new Enemy(100, 100);
 		new Key(150, 150, "KEY");
+		new Key(170, 200, "KEY");
+		new Key(100, 250, "KEY");
+		new Map(130, 150, "MAP");
+		new Gate(toGridX(20), toGridY(19), "GATE");
 		
 		xOffset-=40;
 		addColliders();
@@ -76,6 +83,14 @@ public class Level extends Entity{
 		}
 		glDisable(GL_TEXTURE_2D);
 		tileCollider.render();
+	}
+
+	public static int toGridX(int x){
+		return x * 32;
+	}
+
+	public static int toGridY(int y){
+		return y * 32;
 	}
 
 	public void setPlayer(Player p){

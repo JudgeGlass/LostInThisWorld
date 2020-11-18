@@ -187,6 +187,10 @@ public class Player extends Entity{
 		return health;
 	}
 
+	public HUD getHUD(){
+		return hud;
+	}
+
 	public AABB getCollider(){
 		return collider;
 	}

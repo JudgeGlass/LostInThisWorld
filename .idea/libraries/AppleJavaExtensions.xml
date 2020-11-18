@@ -15,6 +15,7 @@
       <root url="jar://$PROJECT_DIR$/../lwjgl-2.9.3/jar/lzma.jar!/" />
       <root url="jar://$PROJECT_DIR$/../lwjgl-2.9.3/jar/substance-7.2.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/../lwjgl-2.9.3/jar/trident-7.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lwjgl-2.9.3/pngdecoder-1.0 (1).jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

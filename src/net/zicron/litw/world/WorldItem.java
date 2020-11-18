@@ -6,14 +6,16 @@ import net.zicron.litw.logic.AABB;
 public abstract class WorldItem extends Entity {
     protected int x;
     protected int y;
-    protected byte id;
-    protected String itemName;
+    public int textureIndex;
+    public byte id;
+    public String itemName;
 
     public AABB collider;
 
-    public WorldItem(final int x, final int y, String itemName, byte id){
+    public WorldItem(final int x, final int y, final int textureIndex, String itemName, byte id){
         this.x = x;
         this.y = y;
+        this.textureIndex = textureIndex;
         this.itemName = itemName;
         this.id = id;
     }

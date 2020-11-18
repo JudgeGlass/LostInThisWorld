@@ -1,5 +1,7 @@
 package net.zicron.litw.gfx;
 
+import net.zicron.litw.io.Texture;
+
 public class AnimatedTile {
 	
 	private int[] sprites;
@@ -22,6 +24,10 @@ public class AnimatedTile {
 			counter = 0;
 		}
 		counter++;
+	}
+
+	public void render(Texture t, int x, int y, int scale){
+		Drawer.drawTexturedQuad(x, y, t, index, scale);
 	}
 	
 	public int getSprite() {

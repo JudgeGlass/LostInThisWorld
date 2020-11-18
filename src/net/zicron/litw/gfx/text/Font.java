@@ -36,7 +36,8 @@ public class Font {
 		int r = (color & 0xFF0000) >> 16;
 	    int g = (color & 0xFF00) >> 8;
 	    int b = (color & 0xFF);
-	    
+
+	    glPushAttrib(GL_CURRENT_BIT);
 	    glColor3f(r/255, g/255, b/255);
 		
 		if(!background) {
@@ -60,6 +61,7 @@ public class Font {
 			glVertex2f(x * scale, (y + 8) * scale);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
+		glPopAttrib();
 		
 		if(!background) {
 			glDisable(GL_BLEND);

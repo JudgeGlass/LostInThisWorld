@@ -1,13 +1,15 @@
-package net.zicron.litw.world;
+package net.zicron.litw.world.items;
 
 import net.zicron.litw.LITW;
 import net.zicron.litw.gfx.Drawer;
 import net.zicron.litw.gfx.Renderer;
 import net.zicron.litw.logic.AABB;
+import net.zicron.litw.world.Level;
+import net.zicron.litw.world.WorldItem;
 
 public class Key extends WorldItem {
     public Key(int x, int y, String itemName) {
-        super(x, y, itemName, Items.KEY);
+        super(x, y, 4, itemName, Items.KEY);
         Renderer.addToEntityQueue(this);
         collider = new AABB(x, y, 16, 16, Items.KEY);
     }
@@ -19,7 +21,9 @@ public class Key extends WorldItem {
 
         AABB playerCollider = Level.getPlayer().getCollider();
         if(AABB.checkCollision(playerCollider, collider)){
-            Renderer.entityRemoveQueue.add(this);
+            if(Level.getPlayer().getHUD().addItem(this)){
+                Renderer.entityRemoveQueue.add(this);
+            }
         }
     }
 
