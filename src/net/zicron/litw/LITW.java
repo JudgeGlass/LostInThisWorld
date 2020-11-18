@@ -40,7 +40,8 @@ public class LITW {
 		Tiles.init();
 		Level level = new Level();
 		Player player = new Player();
-		
+		level.setPlayer(player);
+
 		gameRenderer.startLoop();
 	}
 }

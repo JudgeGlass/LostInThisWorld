@@ -14,18 +14,20 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Level extends Entity{
 	
-	TileCollider tileCollider = null;
-	LevelLoader level1 = null;
-	
+	private TileCollider tileCollider = null;
+	private LevelLoader level1 = null;
+
+	private static Player player;
 	public static int xOffset;
 	public static int yOffset;
 	
 	public Level() {
-		Renderer.entities.add(this);		
+		Renderer.entities.add(this);
 		tileCollider = new TileCollider();
 		level1 = new LevelLoader("res/level1.txt");
+		Level.player = null;
 		//new Enemy(100, 100);
-		new Key(50, 50, "KEY");
+		new Key(150, 150, "KEY");
 		
 		xOffset-=40;
 		addColliders();
@@ -76,4 +78,11 @@ public class Level extends Entity{
 		tileCollider.render();
 	}
 
+	public void setPlayer(Player p){
+		Level.player = p;
+	}
+
+	public static Player getPlayer(){
+		return Level.player;
+	}
 }

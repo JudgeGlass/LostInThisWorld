@@ -1,14 +1,10 @@
 package net.zicron.litw.world;
 
+import net.zicron.litw.gfx.*;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
 import net.zicron.litw.LITW;
-import net.zicron.litw.gfx.AnimatedTile;
-import net.zicron.litw.gfx.Drawer;
-import net.zicron.litw.gfx.Entity;
-import net.zicron.litw.gfx.Renderer;
-import net.zicron.litw.gfx.Screen;
 import net.zicron.litw.gfx.text.Font;
 import net.zicron.litw.logic.AABB;
 import net.zicron.litw.logic.Bullet;
@@ -22,8 +18,10 @@ public class Player extends Entity{
 	private int x;
 	private int y;
 	private int vel;
+	private int health = 4;
 	
 	private AnimatedTile aTile;
+	private HUD hud;
 	private boolean isStill = true;
 	private int counter = 0;
 	
@@ -49,9 +47,11 @@ public class Player extends Entity{
 		
 		collider = new AABB(x, y, 32, 32, (byte)-1);
 		aTile = new AnimatedTile(new int[] {64, 65}, 10);
+		hud = new HUD(this);
 	}
 
-	public void tick() {		
+	public void tick() {
+		hud.tick();
 		aTile.tick();
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
@@ -137,8 +137,10 @@ public class Player extends Entity{
 	
 
 	public void render() {
-		Font.draw(1, 1, "Tempus_GL - Hunter Wilcox", 0x000000, 2, false, LITW.fontTextures);
-		Font.draw(0, 0, "Tempus_GL - Hunter Wilcox", 0xFFFFFF, 2, false, LITW.fontTextures);
+		hud.render();
+
+		Font.draw(1, 1, "Lost In This World v0.0.1 - Hunter Wilcox", 0x000000, 2, false, LITW.fontTextures);
+		Font.draw(0, 0, "Lost In This World v0.0.1 - Hunter Wilcox", 0xFFFFFF, 2, false, LITW.fontTextures);
 
 		Font.draw(1, 9, "FPS: " + Renderer.getFPS(), 0x00000, 2, false, LITW.fontTextures);
 		Font.draw(0, 8, "FPS: " + Renderer.getFPS(), 0xFFFFFF, 2, false, LITW.fontTextures);
@@ -179,6 +181,14 @@ public class Player extends Entity{
 		if(LITW.DRAW_HITBOX) {
 			collider.render();
 		}
+	}
+
+	public int getHealth(){
+		return health;
+	}
+
+	public AABB getCollider(){
+		return collider;
 	}
 
 }
