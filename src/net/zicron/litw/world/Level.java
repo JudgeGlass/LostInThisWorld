@@ -27,7 +27,7 @@ public class Level extends Entity{
 		tileCollider = new TileCollider();
 		level1 = new LevelLoader("res/level1.txt");
 		Level.player = null;
-		//new Enemy(100, 100);
+		new Enemy(100, 100);
 		new Key(150, 150, "KEY");
 		new Key(170, 200, "KEY");
 		new Key(100, 250, "KEY");

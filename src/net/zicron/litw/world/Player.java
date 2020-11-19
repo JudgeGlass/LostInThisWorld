@@ -105,10 +105,8 @@ public class Player extends Entity{
 					int mouseX = Mouse.getX();
 					int mouseY = (-Mouse.getY() + Screen.current.height);
 					
-					int rise = ((mouseY) - (y+8));
-					int run = ((mouseX) - (x+8));
-					
-					new Bullet(x+8, y+8, rise, run);
+
+					new Bullet(Screen.current.width/2, Screen.current.height/2, -mouseX-Level.xOffset, -mouseY+Level.yOffset);
 				}
 			}
 		}
@@ -199,6 +197,9 @@ public class Player extends Entity{
 	public int getOxygen(){
 		return oxygen;
 	}
+
+	public int getX(){return x;}
+	public int getY(){return y;}
 
 	public HUD getHUD(){
 		return hud;

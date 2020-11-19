@@ -3,8 +3,10 @@ package net.zicron.litw.gfx;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.zicron.litw.io.Log;
 import net.zicron.litw.world.Level;
 import net.zicron.litw.world.Player;
+import net.zicron.litw.world.WorldItem;
 import org.lwjgl.opengl.Display;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -84,6 +86,16 @@ public class Renderer {
 		glClearColor(0f, 0f, 0f, 1.0f);
 		
 		for(Entity e: entities) {
+//			if(e instanceof WorldItem){
+//				WorldItem wi = (WorldItem) e;
+//				int dx = (Level.getPlayer().getX()-Level.xOffset) - wi.collider.x;
+//				int dy = (Level.getPlayer().getY()-Level.yOffset) - wi.collider.y;
+//				int dis = (int)Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) / 32;
+//
+//				if(dis > 6){
+//					continue;
+//				}
+//			}
 			e.render();
 		}
 		

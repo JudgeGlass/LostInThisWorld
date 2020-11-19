@@ -8,13 +8,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="AppleJavaExtensions" level="project" />
-    <orderEntry type="library" name="pngdecoder-1.0" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES />
         <JAVADOC />
         <NATIVE>
-          <root url="file://$MODULE_DIR$/../lwjgl-2.9.3/native/linux" />
+          <root url="file://$USER_HOME$/Documents/lwjgl-2.9.3/native/windows" />
         </NATIVE>
         <SOURCES />
       </library>

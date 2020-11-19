@@ -1,9 +1,13 @@
 package net.zicron.litw.world;
 
+import javafx.application.Platform;
 import net.zicron.litw.gfx.Drawer;
 import net.zicron.litw.gfx.Entity;
 import net.zicron.litw.gfx.Renderer;
+import net.zicron.litw.gfx.Screen;
+import net.zicron.litw.io.Log;
 import net.zicron.litw.logic.AABB;
+import net.zicron.litw.logic.Bullet;
 import net.zicron.litw.logic.TileCollider;
 
 public class Enemy extends Entity{
@@ -23,22 +27,22 @@ public class Enemy extends Entity{
 		
 		collider = new AABB(x, y, 16, 16, (byte)254, -1);
 		TileCollider.colliders.add(collider);
-		
+
 		Renderer.addToEntityQueue(this);
 	}
 	
 	int counter = 0;
 	public void tick() {
-		x = Level.xOffset + ox;
-		y = Level.yOffset + oy + ((int)(Math.sin(counter) * 10));
-		collider.x = x;
-		collider.y = y;
+		if(counter % 20 == 0){
+			if((Level.getPlayer().getX()-Level.xOffset) - x < 6*32 && (Level.getPlayer().getY()-Level.yOffset) - y < 6*32)
+				new Bullet(x + 15, y + 15, Level.getPlayer().getX()-Level.xOffset-32, Level.getPlayer().getY()-Level.yOffset-32);
+		}
 		
 		counter++;
 	}
 
 	public void render() {
-		Drawer.drawQuad(x, y, 16, 16, 0x0000FF);
+		Drawer.drawQuad(x + Level.xOffset, y + Level.yOffset, 16, 16, 0x0000FF);
 		collider.render();
 	}
 

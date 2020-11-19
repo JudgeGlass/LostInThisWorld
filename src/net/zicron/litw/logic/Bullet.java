@@ -9,55 +9,43 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Bullet extends Entity{
 
-	int rise;
-	int run;
 	int x;
 	int y;
+	int x1;
+	int y1;
+	int x2;
+	int y2;
 	
 	int counter = 0;
 	
 	private AABB collider;
 	
-	public Bullet(int x, int y, int rise, int run) {
-		this.x = x;
-		this.y = y;
-		this.rise = rise;
-		this.run = run;
+	public Bullet(int x1, int y1, int x2, int y2) {
+		this.x = x1;
+		this.y = y1;
+		this.x2 = x2;
+		this.y2 = y2;
 		
-		collider = new AABB(x, y, 8, 8, (byte)-2, -1);
+		collider = new AABB(x1, y1, 8, 8, (byte)-2, -1);
 		
 		Renderer.addToEntityQueue(this);
 	}
 	
 	public void tick() {
-		int x = this.x + Level.xOffset;
-		int y = this.y + Level.yOffset;
-
-		if(counter % 60 == 0) {
-			x += run/10;
-			y += rise/10;
-			//addToPos(run/10, rise/10);
+		if(counter % 2 == 0){
+			x += (x2 - x1) / 8D;
+			y += (y2 - y1) / 8;
 		}
-
-		collider.setX(x);
-		collider.setY(y);
-		this.x = x;
-		this.y = y;
 		
-		if(TileCollider.isColliding(collider)) {
-			Renderer.destroy(this);
-		}
+
 		
 		counter++;
 	}
-	
-	private void addToPos(int xx, int yy) {
-		//x = Level.xOffset + collider.ox + xx;
-		Log.info("X: " + x);
-		//y = Level.yOffset + collider.oy + yy;
-	}
 
 	public void render() {
+		int x = this.x + Level.xOffset;
+		int y = this.y + Level.yOffset;
+
 		glPushAttrib(GL_CURRENT_BIT);
 		glColor3f(1.0f, 0.5f, 1.0f);
 		glBegin(GL_QUADS);

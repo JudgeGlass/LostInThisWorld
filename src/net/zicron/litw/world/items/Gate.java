@@ -23,13 +23,6 @@ public class Gate extends WorldItem {
         collider.x = x + Level.xOffset;
         collider.y = y + Level.yOffset;
 
-
-        AABB playerCollider = Level.getPlayer().getCollider();
-
-        if(AABB.checkCollision(playerCollider, collider)){
-            Log.info("HITTING THE WAALFD");
-        }
-
     }
 
     @Override

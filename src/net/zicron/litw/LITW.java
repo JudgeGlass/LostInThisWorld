@@ -22,7 +22,7 @@ public class LITW {
 	public static Texture entityTextures;
 	
 	public static void main(String[] args) {
-		Screen gameScreen = new Screen(1200, 680);
+		Screen gameScreen = new Screen(800, 480);
 		gameScreen.init();
 		
 		Renderer gameRenderer = new Renderer();

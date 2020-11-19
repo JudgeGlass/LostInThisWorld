@@ -1,23 +1,9 @@
 package net.zicron.litw.gfx;
 
-import static org.lwjgl.opengl.GL11.GL_BLEND;
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glBlendFunc;
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glDisable;
-import static org.lwjgl.opengl.GL11.glEnable;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glTexCoord2f;
-import static org.lwjgl.opengl.GL11.glVertex2f;
-import static org.lwjgl.opengl.GL11.glVertex2i;
-
 import net.zicron.litw.io.Texture;
 import net.zicron.litw.io.TileTexture;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class Drawer {
 	public static void drawTexturedQuad(int x, int y, int xOffset, int yOffset, Texture t, byte tile) {
@@ -72,7 +58,8 @@ public class Drawer {
 		int r = (color & 0xFF0000) >> 16;
 	    int g = (color & 0xFF00) >> 8;
 	    int b = (color & 0xFF);
-	    
+
+	    glPushAttrib(GL_CURRENT_BIT);
 	    glColor3f(r/255f, g/255f, b/255f);
 		glBegin(GL_QUADS);
 			glVertex2f(x, y);
@@ -80,6 +67,7 @@ public class Drawer {
 			glVertex2f(x + w, y + h);
 			glVertex2f(x, y + h);
 		glEnd();
+		glPopAttrib();
 	}
 	
 	public static void enable(int function) {
