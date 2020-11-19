@@ -48,11 +48,40 @@ public class HUD {
         return false;
     }
 
+    public boolean hasItem(byte id){
+        for(WorldItem wi: collectedItems){
+            if(wi != null){
+                if(wi.id == id){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void deleteItem(byte id){
+        for(int i = 0; i < collectedItems.length; i++){
+            if(collectedItems[i] != null){
+                if(collectedItems[i].id == id){
+                    if(slotAmount[i] > 0){
+                        slotAmount[i]--;
+                        if(slotAmount[0] == 0){collectedItems[i] = null;}
+                    }else{
+                        collectedItems[i] = null;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     public void tick() {
 
     }
 
     public void render() {
+        Font.draw(Screen.current.width - 128, Screen.current.height - 64, "Oxygen: " + player.getOxygen() + "%", 0xFF0000, 1, true, LITW.fontTextures);
+
         int health = player.getHealth();
         for(int i = 0; i < 5; i++){
             if(i < health){

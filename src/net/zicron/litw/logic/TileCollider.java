@@ -34,17 +34,15 @@ public class TileCollider {
 		AABB playerCol = Player.collider;
 		
 		if(dir == 0)
-			t = new AABB(playerCol.x, playerCol.y, 34, 32, (byte)-1);
+			t = new AABB(playerCol.x, playerCol.y, 34, 32, (byte)-1, -1);
 		else if(dir == -1)
-			t = new AABB(playerCol.x-4, playerCol.y, 32, 32, (byte)-1);
+			t = new AABB(playerCol.x-4, playerCol.y, 32, 32, (byte)-1, -1);
 		else if(dir == 1)
-			t = new AABB(playerCol.x, playerCol.y-4, 32, 32, (byte)-1);
+			t = new AABB(playerCol.x, playerCol.y-4, 32, 32, (byte)-1, -1);
 		else if(dir == 2)
-			t = new AABB(playerCol.x, playerCol.y, 32, 34, (byte)-1);
+			t = new AABB(playerCol.x, playerCol.y, 32, 34, (byte)-1, -1);
 		
 		for(AABB collider: colliders) {
-			int xx = collider.x * 32 + Level.xOffset;
-			int yy = collider.y * 32 + Level.yOffset;
 			if(Level.isOutOfBounds(collider.x, collider.y)) {
 				continue;
 			}			
@@ -56,6 +54,20 @@ public class TileCollider {
 		}
 		
 		return false;
+	}
+
+	public static void removeCollider(int instance){
+		int removeIndex = -1;
+		for(int i = 0; i < colliders.size(); i++){
+			if(colliders.get(i).instance == instance){
+				removeIndex = i;
+				break;
+			}
+		}
+
+		if(removeIndex != -1){
+			colliders.remove(removeIndex);
+		}
 	}
 	
 	public static boolean isColliding(AABB b1) {

@@ -13,8 +13,9 @@ public class AABB {
 	public int width;
 	public int height;
 	public byte id;
+	public int instance;
 	
-	public AABB(int x, int y, int width, int height, byte id) {
+	public AABB(int x, int y, int width, int height, byte id, int instance) {
 		this.x = x;
 		this.y = y;
 		ox = x;
@@ -22,6 +23,7 @@ public class AABB {
 		this.width = width;
 		this.height = height;
 		this.id = id;
+		this.instance = instance;
 	}
 	
 	public static boolean checkCollision(AABB b1, AABB b2) {
@@ -57,6 +59,7 @@ public class AABB {
 	
 	public void render() {
 		if(!LITW.DRAW_HITBOX) return;
+		glPushAttrib(GL_CURRENT_BIT);
 		glColor3f(0.11f, 0.82f, 1f);
 		glLineWidth(1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -67,5 +70,6 @@ public class AABB {
 			glVertex2f(x, y + height);
 		glEnd();
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glPopAttrib();
 	}
 }

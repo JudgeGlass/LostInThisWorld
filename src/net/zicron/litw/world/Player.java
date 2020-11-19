@@ -19,6 +19,7 @@ public class Player extends Entity{
 	private int y;
 	private int vel;
 	private int health = 4;
+	private int oxygen = 100;
 	
 	private AnimatedTile aTile;
 	private HUD hud;
@@ -45,7 +46,7 @@ public class Player extends Entity{
 		x = (Screen.current.width / 2) - 8;
 		y = (Screen.current.height / 2) - 8;
 		
-		collider = new AABB(x, y, 32, 32, (byte)-1);
+		collider = new AABB(x, y, 32, 32, (byte)-1, -1);
 		aTile = new AnimatedTile(new int[] {64, 65}, 10);
 		hud = new HUD(this);
 	}
@@ -185,6 +186,10 @@ public class Player extends Entity{
 
 	public int getHealth(){
 		return health;
+	}
+
+	public int getOxygen(){
+		return oxygen;
 	}
 
 	public HUD getHUD(){

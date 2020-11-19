@@ -3,15 +3,16 @@ package net.zicron.litw.world.items;
 import net.zicron.litw.LITW;
 import net.zicron.litw.gfx.Drawer;
 import net.zicron.litw.gfx.Renderer;
+import net.zicron.litw.gfx.text.Font;
 import net.zicron.litw.logic.AABB;
 import net.zicron.litw.world.Level;
 import net.zicron.litw.world.WorldItem;
 
 public class Map extends WorldItem {
     public Map(int x, int y, String itemName) {
-        super(x, y, 42, itemName, Items.MAP);
+        super(x, y, 42, LITW.createInstanceID(), itemName, Items.MAP);
         Renderer.addToEntityQueue(this);
-        collider = new AABB(x, y, 16, 16, Items.MAP);
+        collider = new AABB(x, y, 16, 16, Items.MAP, instance);
     }
 
     @Override

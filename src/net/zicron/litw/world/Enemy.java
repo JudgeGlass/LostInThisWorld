@@ -21,7 +21,7 @@ public class Enemy extends Entity{
 		ox = x;
 		oy = y;
 		
-		collider = new AABB(x, y, 16, 16, (byte)254);
+		collider = new AABB(x, y, 16, 16, (byte)254, -1);
 		TileCollider.colliders.add(collider);
 		
 		Renderer.addToEntityQueue(this);

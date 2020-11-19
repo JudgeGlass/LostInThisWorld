@@ -9,9 +9,7 @@ import net.zicron.litw.io.LevelLoader;
 import net.zicron.litw.logic.AABB;
 import net.zicron.litw.logic.TileCollider;
 import net.zicron.litw.logic.Tiles;
-import net.zicron.litw.world.items.Gate;
-import net.zicron.litw.world.items.Key;
-import net.zicron.litw.world.items.Map;
+import net.zicron.litw.world.items.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -34,7 +32,9 @@ public class Level extends Entity{
 		new Key(170, 200, "KEY");
 		new Key(100, 250, "KEY");
 		new Map(130, 150, "MAP");
-		new Gate(toGridX(20), toGridY(19), "GATE");
+		new KeyHole(toGridX(20), toGridY(18), "KEYHOLE_1", new Gate(toGridX(20), toGridY(19), "GATE"));
+		new Fire(toGridX(15), toGridY(15), "FIRE");
+
 		
 		xOffset-=40;
 		addColliders();
@@ -46,7 +46,7 @@ public class Level extends Entity{
 				byte data = level1.data[x + y * level1.width];
 				Tiles tile = Tiles.getTileFromID(data);
 				if(tile.hasCollider) {
-					tileCollider.colliders.add(new AABB(x * 32, y * 32, 32, 32, data));
+					tileCollider.colliders.add(new AABB(x * 32, y * 32, 32, 32, data, -1));
 				}
 			}
 		}

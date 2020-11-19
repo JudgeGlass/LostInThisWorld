@@ -2,10 +2,13 @@ package net.zicron.litw;
 
 import net.zicron.litw.gfx.Renderer;
 import net.zicron.litw.gfx.Screen;
+import net.zicron.litw.io.Audio;
 import net.zicron.litw.io.Texture;
 import net.zicron.litw.logic.Tiles;
 import net.zicron.litw.world.Level;
 import net.zicron.litw.world.Player;
+
+import java.util.Random;
 
 
 // Lost in this World
@@ -19,6 +22,7 @@ public class LITW {
 	public static Texture entityTextures;
 	
 	public static void main(String args[]) {
+		Audio.MUSIC.play("sabbath.mp3");
 		Screen gameScreen = new Screen(800, 480);
 		gameScreen.init();
 		
@@ -43,5 +47,11 @@ public class LITW {
 		level.setPlayer(player);
 
 		gameRenderer.startLoop();
+	}
+
+	public static int createInstanceID(){
+		Random r = new Random(Integer.MAX_VALUE);
+		r.setSeed(System.nanoTime());
+		return r.nextInt();
 	}
 }
