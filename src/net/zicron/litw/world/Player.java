@@ -1,6 +1,7 @@
 package net.zicron.litw.world;
 
 import net.zicron.litw.gfx.*;
+import net.zicron.litw.world.items.Key;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -10,6 +11,8 @@ import net.zicron.litw.logic.AABB;
 import net.zicron.litw.logic.Bullet;
 import net.zicron.litw.logic.TileCollider;
 
+import java.util.Random;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class Player extends Entity{
@@ -18,7 +21,7 @@ public class Player extends Entity{
 	private int x;
 	private int y;
 	private int vel;
-	private int health = 4;
+	private int health = 2;
 	private int oxygen = 100;
 	
 	private AnimatedTile aTile;
@@ -62,6 +65,11 @@ public class Player extends Entity{
 				dir = Dir.LEFT;
 				moveHor();
 			}
+		}
+
+		if(Keyboard.isKeyDown(Keyboard.KEY_Q)){
+			Random r = new Random(System.nanoTime());
+			new Key(Level.toGridX(r.nextInt(20)), Level.toGridY(r.nextInt(20)), "KEY");
 		}
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
@@ -140,8 +148,8 @@ public class Player extends Entity{
 	public void render() {
 		hud.render();
 
-		Font.draw(1, 1, "Lost In This World v0.0.1 - Hunter Wilcox", 0x000000, 2, false, LITW.fontTextures);
-		Font.draw(0, 0, "Lost In This World v0.0.1 - Hunter Wilcox", 0xFFFFFF, 2, false, LITW.fontTextures);
+		Font.draw(1, 1, "Lost_In_This_World v0.0.1 - Hunter Wilcox", 0x000000, 2, false, LITW.fontTextures);
+		Font.draw(0, 0, "Lost_In_This_World v0.0.1 - Hunter Wilcox", 0xFFFFFF, 2, false, LITW.fontTextures);
 
 		Font.draw(1, 9, "FPS: " + Renderer.getFPS(), 0x00000, 2, false, LITW.fontTextures);
 		Font.draw(0, 8, "FPS: " + Renderer.getFPS(), 0xFFFFFF, 2, false, LITW.fontTextures);

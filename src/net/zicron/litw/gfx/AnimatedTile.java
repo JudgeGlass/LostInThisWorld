@@ -27,7 +27,7 @@ public class AnimatedTile {
 	}
 
 	public void render(Texture t, int x, int y, int scale){
-		Drawer.drawTexturedQuad(x, y, t, index, scale);
+		Drawer.drawTexturedQuad(x, y, t, sprites[index], scale);
 	}
 	
 	public int getSprite() {

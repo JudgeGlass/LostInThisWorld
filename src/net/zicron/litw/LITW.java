@@ -21,9 +21,8 @@ public class LITW {
 	public static Texture fontTextures;
 	public static Texture entityTextures;
 	
-	public static void main(String args[]) {
-		Audio.MUSIC.play("sabbath.mp3");
-		Screen gameScreen = new Screen(800, 480);
+	public static void main(String[] args) {
+		Screen gameScreen = new Screen(1200, 680);
 		gameScreen.init();
 		
 		Renderer gameRenderer = new Renderer();
@@ -45,7 +44,7 @@ public class LITW {
 		Level level = new Level();
 		Player player = new Player();
 		level.setPlayer(player);
-
+		gameRenderer.enableVsync(true);
 		gameRenderer.startLoop();
 	}
 

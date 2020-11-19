@@ -3,6 +3,8 @@ package net.zicron.litw.gfx;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.zicron.litw.world.Level;
+import net.zicron.litw.world.Player;
 import org.lwjgl.opengl.Display;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -10,6 +12,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer {
 	private static int fps;
+	private boolean vsync = true;
 	
 	public static List<Entity> entities = new ArrayList<>();
 	public static List<Entity> entityQueue = new ArrayList<>();
@@ -31,17 +34,18 @@ public class Renderer {
             long now = System.nanoTime();
             unprocessed += (now - lastTime) / nsPerTick;
             lastTime = now;
-            boolean shouldRender = true;
+            boolean shouldRender = !vsync;
             while (unprocessed >= 1) {
                 ticks++;
                 tick();
                 unprocessed -= 1;
                 shouldRender = true;
             }
-            
-            
 
-            if (shouldRender) {
+
+
+
+			if (shouldRender) {
                 frames++;
                 render();
                 Display.update();
@@ -57,6 +61,10 @@ public class Renderer {
             }
         }
         stop();
+	}
+
+	public void enableVsync(boolean en){
+		vsync = en;
 	}
 	
 	public static int getFPS() {
