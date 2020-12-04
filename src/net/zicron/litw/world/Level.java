@@ -32,7 +32,7 @@ public class Level extends Entity{
 		new Key(170, 200, "KEY");
 		new Key(100, 250, "KEY");
 		new Map(130, 150, "MAP");
-		new KeyHole(toGridX(20), toGridY(18), "KEYHOLE_1", new Gate(toGridX(20), toGridY(19), "GATE"));
+		new KeyHole(toGridX(20)+36, toGridY(19)-16, "KEYHOLE_1", new Gate(toGridX(20), toGridY(19), "GATE"));
 		new Fire(toGridX(15), toGridY(15), "FIRE");
 		new Fire(toGridX(16), toGridY(15), "FIRE");
 		new Fire(toGridX(17), toGridY(15), "FIRE");
@@ -64,8 +64,6 @@ public class Level extends Entity{
 	
 
 	public void tick() {
-		//AABB collider = TileCollider.colliders.get(0);
-		//collider.x = xOffset;
 		tileCollider.updateAABB();
 	}
 

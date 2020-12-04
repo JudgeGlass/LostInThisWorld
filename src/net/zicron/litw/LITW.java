@@ -2,6 +2,7 @@ package net.zicron.litw;
 
 import net.zicron.litw.gfx.Renderer;
 import net.zicron.litw.gfx.Screen;
+import net.zicron.litw.gfx.gui.TextField;
 import net.zicron.litw.io.Audio;
 import net.zicron.litw.io.Texture;
 import net.zicron.litw.logic.Tiles;

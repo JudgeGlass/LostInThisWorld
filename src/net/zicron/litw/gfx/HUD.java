@@ -1,6 +1,7 @@
 package net.zicron.litw.gfx;
 
 import net.zicron.litw.LITW;
+import net.zicron.litw.gfx.gui.TextField;
 import net.zicron.litw.gfx.text.Font;
 import net.zicron.litw.io.Audio;
 import net.zicron.litw.world.Player;
@@ -16,12 +17,14 @@ public class HUD {
     private WorldItem[] collectedItems;
     private int[] slotAmount;
 
-
+    private TextField tf;
 
     public HUD(Player player){
         collectedItems = new WorldItem[8];
         slotAmount = new int[8];
         this.player = player;
+
+        tf = new TextField(50, 50, 128, 32);
     }
 
     public boolean addItem(final WorldItem worldItem){
@@ -76,10 +79,11 @@ public class HUD {
     }
 
     public void tick() {
-
+        tf.tick();
     }
 
     public void render() {
+        tf.render();
         Font.draw(Screen.current.width - 128, Screen.current.height - 64, "Oxygen: " + player.getOxygen() + "%", 0xFF0000, 1, true, LITW.fontTextures);
 
         int health = player.getHealth();

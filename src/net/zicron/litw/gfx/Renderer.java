@@ -19,6 +19,7 @@ public class Renderer {
 	public static List<Entity> entities = new ArrayList<>();
 	public static List<Entity> entityQueue = new ArrayList<>();
 	public static List<Entity> entityRemoveQueue = new ArrayList<>();
+	public static boolean screenRefresh = false;
 	
 	public Renderer() {
 		
@@ -82,6 +83,12 @@ public class Renderer {
 	}
 	
 	private void render() {
+		if(screenRefresh){
+			glViewport(0, 0, Screen.current.width, Screen.current.height);
+			//glOrtho(0, Screen.current.width, Screen.current.height, 0, -1, 1);
+			screenRefresh = false;
+		}
+
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0f, 0f, 0f, 1.0f);
 		

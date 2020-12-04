@@ -1,6 +1,7 @@
 package net.zicron.litw.world;
 
 import net.zicron.litw.gfx.*;
+import net.zicron.litw.io.Log;
 import net.zicron.litw.world.items.Key;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -184,10 +185,8 @@ public class Player extends Entity{
 			glVertex2f(Mouse.getX(), (-Mouse.getY() + Screen.current.height));
 		glEnd();
 		glPopAttrib();
-		
-		if(LITW.DRAW_HITBOX) {
-			collider.render();
-		}
+
+		collider.render();
 	}
 
 	public int getHealth(){
