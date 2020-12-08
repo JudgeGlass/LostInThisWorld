@@ -25,6 +25,7 @@ public class Server {
 		while(LITW.isRunning) {
 			try {				
 				Socket client = server.accept();
+				Log.info("SERVER: Connection:" + client.getInetAddress());
 				new Thread(() -> new ClientHandler(client)).start();
 			} catch (IOException e) {
 				e.printStackTrace();

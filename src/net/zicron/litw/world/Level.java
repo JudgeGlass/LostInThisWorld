@@ -11,6 +11,8 @@ import net.zicron.litw.logic.TileCollider;
 import net.zicron.litw.logic.Tiles;
 import net.zicron.litw.world.items.*;
 
+import java.io.IOException;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class Level extends Entity{
@@ -22,10 +24,10 @@ public class Level extends Entity{
 	public static int xOffset;
 	public static int yOffset;
 	
-	public Level() {
+	public Level(LevelLoader levelLoader) {
 		Renderer.entities.add(this);
 		tileCollider = new TileCollider();
-		level1 = new LevelLoader("res/level1.txt");
+		level1 = levelLoader;
 		Level.player = null;
 		new Enemy(100, 100);
 		new Key(150, 150, "KEY");
@@ -65,6 +67,23 @@ public class Level extends Entity{
 
 	public void tick() {
 		tileCollider.updateAABB();
+
+		try {
+			LITW.nc.sendCommand("GET_ENTITY_LIST");
+			int itemId = LITW.nc.getInt();
+			int x = LITW.nc.getInt();
+			int y = LITW.nc.getInt();
+			int id = LITW.nc.getInt();
+
+			if(!Renderer.containsEntity(id)){
+				if(itemId == -1){
+					Entity e = new Player(x, y, id);
+					Renderer.addToEntityQueue(e);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void render() {

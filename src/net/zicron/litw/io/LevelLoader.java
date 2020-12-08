@@ -21,6 +21,12 @@ public class LevelLoader {
 			e.printStackTrace();
 		}
 	}
+
+	public LevelLoader(int width, int height, byte[] data){
+		this.width = width;
+		this.height = height;
+		this.data = data;
+	}
 	
 	private void load() throws NumberFormatException, IOException {
 		String line;

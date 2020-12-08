@@ -5,21 +5,41 @@ import static org.lwjgl.opengl.GL11.*;
 import net.zicron.litw.LITW;
 import net.zicron.litw.gfx.Drawer;
 import net.zicron.litw.gfx.Renderer;
+import net.zicron.litw.gfx.Screen;
 import net.zicron.litw.gfx.text.Font;
 import net.zicron.litw.io.Log;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 public class TextField extends GUIItem{
     private String text = "";
 
+    private boolean isFocused = false;
+    private int characterLimit = 0;
+
     public TextField(int x, int y, int w, int h) {
         super(x, y, w, h);
         //Renderer.addToEntityQueue(this);
+        characterLimit = ((w - 16) / 8);
     }
 
     @Override
     public void tick() {
-        while(Keyboard.next()){
+        int mouseX = Mouse.getX();
+        int mouseY = (-Mouse.getY() + Screen.current.height);
+
+        while(Mouse.next()){
+            if(Mouse.getEventButton() == 0){
+                if(rectangle.contains(mouseX, mouseY)){
+                    isFocused = true;
+                }else{
+                    isFocused = false;
+                }
+            }
+        }
+
+
+        while(Keyboard.next() && isFocused){
             if(Keyboard.getEventKey() == Keyboard.KEY_BACK){
                 if(Keyboard.getEventKeyState()) {
                     if (text.length() > 0) {
@@ -28,7 +48,9 @@ public class TextField extends GUIItem{
                 }
             }else {
                 if(Keyboard.getEventKeyState()) {
-                    text += (Keyboard.getEventCharacter() == 0) ? "" : Keyboard.getEventCharacter();
+                    if(text.length() <= characterLimit) {
+                        text += (Keyboard.getEventCharacter() == 0) ? "" : Keyboard.getEventCharacter();
+                    }
                 }
             }
         }
@@ -43,7 +65,10 @@ public class TextField extends GUIItem{
     public void render() {
         Drawer.drawQuad(x, y, rectangle.width, rectangle.height, 0x000000);
         glPushAttrib(GL_CURRENT_BIT);
-        glColor3f(1f, 1f, 0f);
+        if(isFocused)
+            glColor3f(1f, 1f, 0f);
+        else
+            glColor3f(1f, 1f, 1f);
         glLineWidth(1);
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glBegin(GL_POLYGON);

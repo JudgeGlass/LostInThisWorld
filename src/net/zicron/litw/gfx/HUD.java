@@ -24,7 +24,7 @@ public class HUD {
         slotAmount = new int[8];
         this.player = player;
 
-        tf = new TextField(50, 50, 128, 32);
+        tf = new TextField((Screen.current.width / 2) + 64, Screen.current.height - 48, 196, 32);
     }
 
     public boolean addItem(final WorldItem worldItem){

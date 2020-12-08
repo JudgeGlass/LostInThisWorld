@@ -69,6 +69,16 @@ public class Renderer {
 	public void enableVsync(boolean en){
 		vsync = en;
 	}
+
+	public static boolean containsEntity(int id){
+		for(Entity e: entities){
+			if(e.id == id){
+				return true;
+			}
+		}
+
+		return false;
+	}
 	
 	public static int getFPS() {
 		return fps;

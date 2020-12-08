@@ -12,6 +12,7 @@ import net.zicron.litw.logic.AABB;
 import net.zicron.litw.logic.Bullet;
 import net.zicron.litw.logic.TileCollider;
 
+import java.io.IOException;
 import java.util.Random;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -28,6 +29,7 @@ public class Player extends Entity{
 	private AnimatedTile aTile;
 	private HUD hud;
 	private boolean isStill = true;
+	private boolean isNetPlayer = false;
 	private int counter = 0;
 	
 	private enum Dir {
@@ -53,9 +55,27 @@ public class Player extends Entity{
 		collider = new AABB(x, y, 32, 32, (byte)-1, -1);
 		aTile = new AnimatedTile(new int[] {64, 65}, 10);
 		hud = new HUD(this);
+		try {
+			LITW.nc.sendCommand("REG_PLAYER");
+			LITW.nc.sendInt(x + Level.xOffset);
+			LITW.nc.sendInt(y + Level.yOffset);
+			LITW.nc.sendInt(this.id);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Player(int x, int y, int id){
+		this.x = x;
+		this.y = y;
+		this.id = id;
+		isNetPlayer = true;
 	}
 
 	public void tick() {
+		if(isNetPlayer){
+			return;
+		}
 		hud.tick();
 		aTile.tick();
 		
@@ -145,7 +165,8 @@ public class Player extends Entity{
 	
 
 	public void render() {
-		hud.render();
+		if(!isNetPlayer)
+			hud.render();
 
 		Font.draw(1, 1, "Lost_In_This_World v0.0.1 - Hunter Wilcox", 0x000000, 2, false, LITW.fontTextures);
 		Font.draw(0, 0, "Lost_In_This_World v0.0.1 - Hunter Wilcox", 0xFFFFFF, 2, false, LITW.fontTextures);
